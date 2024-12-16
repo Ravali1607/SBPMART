@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns:cards="sap.f.cards" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core= "sap.ui.core"
+xmlns= "sap.m"
+>
+    <Dialog id="dialog1">
+    <customHeader>
+    <Bar> 
+        <contentLeft><Text text="Enter Plant Details"></Text></contentLeft>
+        <contentRight><Button icon="sap-icon://refresh" press="onRefresh"></Button></contentRight>
+    </Bar>
+    </customHeader>
+        <form:SimpleForm >
+            <form:content>
+                <Label text="Plant ID"></Label>
+                <Input id="p_id"></Input>
+                <Label text="Name"></Label>
+                <Input id="p_name"></Input>
+                <Label text="Location"></Label>
+                <Input id="p_loc"></Input>
+                <Label text="Avatar"></Label>
+                <Input id="p_avatar"></Input>
+                <Label text="Contact"></Label>
+                <Input id="p_cont"></Input>
+                <Label text="Email"></Label>
+                <Input id="p_email"></Input>
+                <Label text="Head of the Plant"></Label>
+                <Input id="p_head"></Input>
+                <Label text="Revenue"></Label>
+                <Input id="p_rev"></Input>
+                <Label text="Customer Count"></Label>
+                <Input id="p_count"></Input>
+            </form:content>
+        </form:SimpleForm>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="Create" press="onCreatePlant"></Button>
+                <Button text="Cancel" press="onCancelPlant"></Button>
+            </Toolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

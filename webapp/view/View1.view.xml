@@ -1,0 +1,83 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" controllerName="sbpmart.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" showHeader="false" title="{i18n>title}">
+        <Bar >
+            <contentLeft><Text text="PLANTS INFORMATION"></Text></contentLeft>
+            <contentRight><Button icon="sap-icon://add" press="onAddPlant"></Button></contentRight>
+        </Bar>
+        
+        <!-- <List items = "{/PLANTS}">
+            <items>
+            <StandardListItem 
+            title="{PLANT_NAME}"
+            description="{PLANT_LOC}"
+            type="Navigation"
+            press="onEmployeeList"></StandardListItem>
+            </items>
+        </List> -->
+
+        <Table items="{/PLANTS}">
+            <columns>
+                <Column >
+                    <Text text="PLANT ID"></Text>
+                </Column>
+                <Column >
+                    <Text text="NAME"></Text>
+                </Column>
+                <Column >
+                    <Text text="LOCATION"></Text>
+                </Column>
+                <Column >
+                    <Text text="AVATAR"></Text>
+                </Column>
+                <Column >
+                    <Text text="CONTACT"></Text>
+                </Column>
+                <Column >
+                    <Text text="EMAIL"></Text>
+                </Column>
+                <Column >
+                    <Text text="HEAD"></Text>
+                </Column>
+                <Column >
+                    <Text text="REVENUE"></Text>
+                </Column>
+                <Column >
+                    <Text text="CUSTOMER COUNT"></Text>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem type="Active" press="onEmployeeList" >
+                    <cells>
+                    <Text text="{PLANT_ID}"></Text>
+                    </cells>
+                    <cells>
+                    <Text text="{PLANT_NAME}"></Text>
+                    </cells>
+                    <cells>
+                    <Text text="{PLANT_LOC}"></Text>
+                    </cells>
+                    <cells>
+                        <Avatar src="{PLANT_AVATAR}"></Avatar>
+                    </cells>
+                    <cells>
+                    <Text text="{PLANT_CONT}"></Text>
+                    </cells>
+                    <cells>
+                    <Text text="{PLANT_EMAIL}"></Text>
+                    </cells>
+                    <cells>
+                    <Text text="{PLANT_HEAD}"></Text>
+                    </cells>
+                    <cells>
+                    <Text text="{PLANT_REVENUE}"></Text>
+                    </cells>
+                    <cells>
+                    <Text text="{PLANT_CUST_COUNT}"></Text>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>

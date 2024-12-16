@@ -1,0 +1,80 @@
+<mvc:View xmlns:cards="sap.f.cards" xmlns:uxap="sap.uxap" controllerName="sbpmart.controller.View2"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+        <Page id="page1" showHeader="false">
+        
+            <!-- <List items ="{/EMPLOYEE}" id="empList">
+            <StandardListItem 
+            title="{/EMP_NAME}"
+            description="{/EMP_DESIG}"
+            info="{/EMP_ADDRESS}"
+            ></StandardListItem>
+            </List> -->
+            <Bar>
+                <contentLeft><Button press="backNav" icon="sap-icon://nav-back"></Button></contentLeft>
+                <contentMiddle><Title text="{textModel>/EMP_BRANCH}"></Title></contentMiddle>
+                <contentRight><Button icon="sap-icon://add" press="addEmployee"></Button></contentRight>
+            </Bar>
+            <Table id="empList" items="{/items}">
+                <columns>
+                    <Column >
+                        <Text text="ID"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="NAME"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="BLOOD GROUP"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="DESIGNATION"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="EMAIL"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="CONTACT"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="ADDRESS"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="BRANCH"></Text>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{EMP_ID}"></Text>
+                        </cells>
+                        <cells>
+                            <Text text="{EMP_NAME}"></Text>
+                        </cells>
+                        <cells>
+                        <Text text="{EMP_BLODD_GRP}"></Text>
+                        </cells>
+                        <cells>
+                        <Text text="{EMP_DESIG}"></Text>
+                        </cells>
+                        <cells>
+                        <Text text="{EMP_EMAIL}"></Text>
+                        </cells>
+                        <cells>
+                        <Text text="{EMP_CONT}"></Text>
+                        </cells>
+                        <cells>
+                        <Text text="{EMP_ADDRESS}"></Text>
+                        </cells>
+                        <cells>
+                        <Text text="{EMP_BRANCH}"></Text>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <footer>
+                <Toolbar >
+                    <ToolbarSpacer ></ToolbarSpacer>
+                </Toolbar>
+            </footer>
+        </Page>       
+</mvc:View>
