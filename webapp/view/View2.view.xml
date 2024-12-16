@@ -12,10 +12,14 @@
             </List> -->
             <Bar>
                 <contentLeft><Button press="backNav" icon="sap-icon://nav-back"></Button></contentLeft>
-                <contentMiddle><Title text="{textModel>/EMP_BRANCH}"></Title></contentMiddle>
+                <contentMiddle><Title text="{i18n>branch}{textModel>/EMP_BRANCH}"></Title></contentMiddle>
                 <contentRight><Button icon="sap-icon://add" press="addEmployee"></Button></contentRight>
             </Bar>
-            <Table id="empList" items="{/items}">
+            <Table id="empList" items="{
+                                            path: '/items',
+                                            sorter: [
+                                                {path: 'EMP_BLODD_GRP',
+                                                descending : true} ]      }">
                 <columns>
                     <Column >
                         <Text text="ID"></Text>

@@ -12,7 +12,7 @@ sap.ui.define([
             // var oModel1 = this.getOwnerComponent().getModel();
             //     if (!oModel1) {
             //         oModel1 = new JSONModel({
-            //             EMP_BRANCH: "", // Initialize EMP_BRANCH as an empty string
+            //             EMP_BRANCH: "", 
            // });
         //this.getView().setModel(oModel1);
         
@@ -23,7 +23,7 @@ sap.ui.define([
         empMethod:function(oEvent){
             var oData = oEvent.getParameter("arguments");
             var plantLoc = oData.plantLocation;
-            var     EMP_BRANCH = new sap.ui.model.json.JSONModel({
+            var EMP_BRANCH = new sap.ui.model.json.JSONModel({
                 EMP_BRANCH : plantLoc
             })
             that.getView().setModel(EMP_BRANCH,"textModel");
@@ -34,8 +34,9 @@ sap.ui.define([
                 success:function(response){
                     var filteredEmployees = response.results.filter(employee=> employee.EMP_BRANCH === plantLoc);
                     console.log(filteredEmployees);
+                    
                     var oModel = new sap.ui.model.json.JSONModel({
-                        items: filteredEmployees
+                        items : filteredEmployees
                     })
                     that.byId("empList").setModel(oModel);
                     sap.m.MessageToast.show("Displaying Employee List");

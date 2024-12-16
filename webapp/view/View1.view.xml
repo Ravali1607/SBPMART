@@ -71,7 +71,7 @@
                     <Text text="{PLANT_HEAD}"></Text>
                     </cells>
                     <cells>
-                    <Text text="{PLANT_REVENUE}"></Text>
+                    <Text text="{PLANT_REVENUE}" ></Text>
                     </cells>
                     <cells>
                     <Text text="{PLANT_CUST_COUNT}"></Text>
