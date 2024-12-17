@@ -20,61 +20,64 @@
         <Table items="{/PLANTS}">
             <columns>
                 <Column >
-                    <Text text="PLANT ID"></Text>
+                    <Text text="PLANT ID"/>
                 </Column>
                 <Column >
-                    <Text text="NAME"></Text>
+                    <Text text="NAME"/>
                 </Column>
                 <Column >
-                    <Text text="LOCATION"></Text>
+                    <Text text="LOCATION"/>
                 </Column>
                 <Column >
-                    <Text text="AVATAR"></Text>
+                    <Text text="AVATAR"/>
                 </Column>
                 <Column >
-                    <Text text="CONTACT"></Text>
+                    <Text text="CONTACT"/>
                 </Column>
                 <Column >
-                    <Text text="EMAIL"></Text>
+                    <Text text="EMAIL"/>
                 </Column>
                 <Column >
-                    <Text text="HEAD"></Text>
+                    <Text text="HEAD"/>
                 </Column>
                 <Column >
-                    <Text text="REVENUE"></Text>
+                    <Text text="REVENUE"/>
                 </Column>
                 <Column >
-                    <Text text="CUSTOMER COUNT"></Text>
+                    <Text text="CUSTOMER COUNT"/>
                 </Column>
             </columns>
             <items>
                 <ColumnListItem type="Active" press="onEmployeeList" >
+                <customData>
+                    <core:CustomData key="rev" value="{PLANT_REVENUE}" writeToDom="true"></core:CustomData>
+                </customData>
                     <cells>
-                    <Text text="{PLANT_ID}"></Text>
+                    <Text text="{PLANT_ID}"/>
                     </cells>
                     <cells>
-                    <Text text="{PLANT_NAME}"></Text>
+                    <Text text="{PLANT_NAME}"/>
                     </cells>
                     <cells>
-                    <Text text="{PLANT_LOC}"></Text>
+                    <Text text="{PLANT_LOC}"/>
                     </cells>
                     <cells>
-                        <Avatar src="{PLANT_AVATAR}"></Avatar>
+                        <Avatar src="{PLANT_AVATAR}"/>
                     </cells>
                     <cells>
-                    <Text text="{PLANT_CONT}"></Text>
+                    <Text text="{PLANT_CONT}"/>
                     </cells>
                     <cells>
-                    <Text text="{PLANT_EMAIL}"></Text>
+                    <Text text="{PLANT_EMAIL}"/>
                     </cells>
                     <cells>
-                    <Text text="{PLANT_HEAD}"></Text>
+                    <Text text="{PLANT_HEAD}"/>
                     </cells>
                     <cells>
-                    <Text text="{PLANT_REVENUE}" ></Text>
+                    <Text text="{PLANT_REVENUE}" />
                     </cells>
                     <cells>
-                    <Text text="{PLANT_CUST_COUNT}"></Text>
+                    <Text text="{PLANT_CUST_COUNT}"/>
                     </cells>
                 </ColumnListItem>
             </items>

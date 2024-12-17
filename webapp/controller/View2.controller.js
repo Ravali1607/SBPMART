@@ -28,6 +28,7 @@ sap.ui.define([
             })
             that.getView().setModel(EMP_BRANCH,"textModel");
             that.filterEmpByLoc(plantLoc);
+            
         },
         filterEmpByLoc:function(plantLoc){
             that.getOwnerComponent().getModel().read("/EMPLOYEE",{

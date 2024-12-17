@@ -1,1 +1,29 @@
-/* Enter your custom styles here */
+/* .red {
+    background: #e97070
+}
+
+.green{
+    background: #7cdf5f
+}
+
+.yellow {
+    background: #dcca3e 
+}
+
+.blue {
+    background: #5ac4f5
+} */
+tr[data-rev = ("rev>0 && rev<=25000")]{
+    background: #e97070 ;
+    }
+    tr[data-rev = ("rev>25000 && rev<=50000")]{
+        background: #7cdf5f ;
+        }
+          
+        tr[data-rev = ("rev>50000 && rev<=75000")]{
+            background: #dcca3e ;
+            }
+
+            tr[data-rev = ("rev>75000")]{
+                background: #5ac4f5 ;
+                }

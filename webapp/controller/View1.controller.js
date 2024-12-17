@@ -1,9 +1,10 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
 ], (Controller) => {
     "use strict";
     var that;
     return Controller.extend("sbpmart.controller.View1", {
+        // formatter : formatter,
         onInit() {
             that=this;
             var oModel=that.getOwnerComponent().getModel();

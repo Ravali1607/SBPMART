@@ -19,7 +19,7 @@
                                             path: '/items',
                                             sorter: [
                                                 {path: 'EMP_BLODD_GRP',
-                                                descending : true} ]      }">
+                                                descending : true} ] }">
                 <columns>
                     <Column >
                         <Text text="ID"></Text>
