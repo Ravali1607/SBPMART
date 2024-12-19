@@ -48,7 +48,8 @@
                 </Column>
             </columns>
             <items>
-                <ColumnListItem type="Active" press="onEmployeeList" >
+                <ColumnListItem type="Active" press="onEmployeeList" 
+                 class="{path: 'PLANT_REVENUE', formatter: 'formatter.formatRevenueClass'}">
                 <customData>
                     <core:CustomData key="rev" value="{PLANT_REVENUE}" writeToDom="true"></core:CustomData>
                 </customData>
@@ -61,12 +62,12 @@
                     <Text text="{PLANT_EMAIL}"/>                    
                     <Text text="{PLANT_HEAD}"/>
                     <Text text="{PLANT_REVENUE}"/>
+                    <!-- <Text text="{path: 'PLANT_REVENUE', formatter: '.formatter.formatRevenueClass'}"/> -->
                     <!-- <ObjectNumber number="{PLANT_REVENUE}" emphasized="true" inverted="true"
                      state="{= ${PLANT_REVENUE} >75000  ? 'Success' : ${PLANT_REVENUE} > 50000 ?'Error' : ${PLANT_REVENUE} > 25000 ? 'Warning' : 'Information' }"/> -->
                     <Text text="{PLANT_CUST_COUNT}"/>
                     </cells>
                 </ColumnListItem>
-
             </items>
         </Table>
     </Page>

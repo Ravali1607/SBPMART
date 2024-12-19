@@ -68,7 +68,6 @@ sap.ui.define([
                 success: function (response) {
                     sap.m.MessageToast.show("Employee Data added successfully");
                     oData.refresh();
-                    //that.getView().getModel().refresh(true);
                     }.bind(that),
                 error: function (error) {
                     console.log(error)
