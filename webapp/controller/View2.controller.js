@@ -67,6 +67,7 @@ sap.ui.define([
             oData.create("/EMPLOYEE", oNewEmployee, {
                 success: function (response) {
                     sap.m.MessageToast.show("Employee Data added successfully");
+                    oData.push(oNewEmployee);
                     oData.refresh();
                     }.bind(that),
                 error: function (error) {

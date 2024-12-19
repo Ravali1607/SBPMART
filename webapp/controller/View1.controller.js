@@ -10,7 +10,7 @@ sap.ui.define([
             that=this;
             var oModel=that.getOwnerComponent().getModel();
             that.getView().getModel(oModel);
-
+            
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
@@ -61,17 +61,17 @@ sap.ui.define([
                 plantLocation : oPlant
             });
         },
-        // getRevenueStyleClass: function (revenue) {
-        //     if (revenue > 0 && revenue <= 25000) {
-        //         return "blueBg";  // Return the class name for this range
-        //     } else if (revenue > 25000 && revenue <= 50000) {
-        //         return "greenBg";  // Return the class name for this range
-        //     } else if (revenue > 50000 && revenue <= 75000) {
-        //         return "yellowBg";  // Return the class name for this range
-        //     } else {
-        //         return "redBg";  // Return the class name for this range
-        //     }
-        // }
+        formatRevenueClass: function (revenue) {
+            if (revenue > 0 && revenue <= 25000) {
+                return "blue";  // Return the class name for this range
+            } else if (revenue > 25000 && revenue <= 50000) {
+                return "green";  // Return the class name for this range
+            } else if (revenue > 50000 && revenue <= 75000) {
+                return "yellow";  // Return the class name for this range
+            } else {
+                return "red";  // Return the class name for this range
+            }
+        }
 
     });
 });

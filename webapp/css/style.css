@@ -1,17 +1,17 @@
 .red {
-    background-color: #e97070;
+    background-color: red !important;
 }
 
 .green{
-    background-color: #7cdf5f;
+    background-color: green !important;
 }
 
 .yellow {
-    background-color: #dcca3e;
+    background-color: yellow !important;
 }
 
 .blue {
-    background-color: #5ac4f5;
+    background-color: blue !important;
 }
 /* tr[data-rev = ("rev>0 && rev<=25000")]{
     background: #e97070 ;
@@ -25,18 +25,3 @@
             tr[data-rev = ("rev>75000")]{
                 background: #5ac4f5 ;
                 } */
-                /* .rev-0-25000 {
-                    background: #e97070;
-                }
-                .rev-25001-50000{
-                    background: #7cdf5f;
-                }
-                
-                .rev-50001-75000 {
-                    background: #dcca3e;
-                }
-                
-                .rev-75001 {
-                    background: #5ac4f5;
-                } */
-                
