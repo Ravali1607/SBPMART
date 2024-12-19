@@ -9,18 +9,16 @@ sap.ui.define([
             that = this;
             var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
             oRouter.getRoute('View2').attachPatternMatched(that.empMethod,that);
-            // var oModel1 = this.getOwnerComponent().getModel();
-            //     if (!oModel1) {
-            //         oModel1 = new JSONModel({
-            //             EMP_BRANCH: "", 
-           // });
-        //this.getView().setModel(oModel1);
-        
+            var oModel = that.getOwnerComponent().getModel();
             if(!that.dialog2){
                 that.dialog2 = sap.ui.xmlfragment("sbpmart.fragments.createEmp", that);
             }
         },
         empMethod:function(oEvent){
+            // if (!that.) {
+            //     this.getOwnerComponent().getRouter().navTo("RouteView1");
+            //     return;
+            // }
             var oData = oEvent.getParameter("arguments");
             var plantLoc = oData.plantLocation;
             var EMP_BRANCH = new sap.ui.model.json.JSONModel({
@@ -68,15 +66,17 @@ sap.ui.define([
             var oData = that.getOwnerComponent().getModel();
             oData.create("/EMPLOYEE", oNewEmployee, {
                 success: function (response) {
-                    MessageToast.show("Employee Data added successfully");
-                    
-                },
+                    sap.m.MessageToast.show("Employee Data added successfully");
+                    oData.refresh();
+                    //that.getView().getModel().refresh(true);
+                    }.bind(that),
                 error: function (error) {
                     console.log(error)
                 }
         })
+            
             that.dialog2.close();
-            that.refresh();
+            that.onReset();
         },
         onClose: function(){
             that.dialog2.close();

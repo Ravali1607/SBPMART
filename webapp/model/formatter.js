@@ -13,9 +13,7 @@
 //                     color ="red"
 //                 }
 
-//                 if(this.addStyleClass){
-//                     this.addStyleClass(color);
-//                 }
+//                 return color;
 //             }
 //         }
 // });

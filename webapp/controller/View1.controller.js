@@ -1,10 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-], (Controller) => {
+    "sbpmart/model/formatter"
+], (Controller,formatter) => {
     "use strict";
     var that;
     return Controller.extend("sbpmart.controller.View1", {
-        // formatter : formatter,
+         formatter : formatter,
         onInit() {
             that=this;
             var oModel=that.getOwnerComponent().getModel();
@@ -59,6 +60,18 @@ sap.ui.define([
             that.getOwnerComponent().getRouter().navTo("View2",{
                 plantLocation : oPlant
             });
-        }
+        },
+        // getRevenueStyleClass: function (revenue) {
+        //     if (revenue > 0 && revenue <= 25000) {
+        //         return "blueBg";  // Return the class name for this range
+        //     } else if (revenue > 25000 && revenue <= 50000) {
+        //         return "greenBg";  // Return the class name for this range
+        //     } else if (revenue > 50000 && revenue <= 75000) {
+        //         return "yellowBg";  // Return the class name for this range
+        //     } else {
+        //         return "redBg";  // Return the class name for this range
+        //     }
+        // }
+
     });
 });
