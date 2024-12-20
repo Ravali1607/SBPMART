@@ -17,56 +17,50 @@
             </items>
         </List> -->
 
-        <Table items="{/PLANTS}">
+        <Table id="plantData" items="{path: '/PLANTS', sorter: [
+                                                {path: 'PLANT_REVENUE',
+                                                descending : true} ] }">
             <columns>
-                <Column >
+                <Column>
                     <Text text="PLANT ID"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="NAME"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="LOCATION"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="AVATAR"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="CONTACT"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="EMAIL"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="HEAD"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="REVENUE"/>
                 </Column>
-                <Column >
+                <Column>
                     <Text text="CUSTOMER COUNT"/>
                 </Column>
             </columns>
             <items>
-                <ColumnListItem type="Active" press="onEmployeeList" >
-                <!-- class="{path: 'PLANT_REVENUE', formatter  :'.formatRevenueClass'}"> -->
-                <customData>
-                    <core:CustomData key="rev" value="{PLANT_REVENUE}" writeToDom="true"></core:CustomData>
-                </customData>
+                <ColumnListItem type="Active" press="onEmployeeList">
                     <cells>
-                    <Text text="{PLANT_ID}"/>                   
-                    <Text text="{PLANT_NAME}"/>      
-                    <Text text="{PLANT_LOC}"/>    
-                    <Avatar src="{PLANT_AVATAR}"/>     
-                    <Text text="{PLANT_CONT}"/>
-                    <Text text="{PLANT_EMAIL}"/>                    
-                    <Text text="{PLANT_HEAD}"/>
-                    <Text text="{PLANT_REVENUE}"/>
-                    <Text text="{PLANT_REVENUE}" class="{path: 'PLANT_REVENUE', formatter  :'.formatRevenueClass'}" />
-                    <!-- <Text text="{path: 'PLANT_REVENUE', formatter: '.formatter.formatRevenueClass' }"/> -->
-                    <!-- <ObjectNumber number="{PLANT_REVENUE}" emphasized="true" inverted="true"
-                     state="{= ${PLANT_REVENUE} >75000  ? 'Success' : ${PLANT_REVENUE} > 50000 ?'Error' : ${PLANT_REVENUE} > 25000 ? 'Warning' : 'Information' }"/> -->
-                    <Text text="{PLANT_CUST_COUNT}"/>
+                        <Text text="{PLANT_ID}"/>
+                        <Text text="{PLANT_NAME}"/>
+                        <Text text="{PLANT_LOC}"/>
+                        <Avatar src="{PLANT_AVATAR}"/>
+                        <Text text="{PLANT_CONT}"/>
+                        <Text text="{PLANT_EMAIL}"/>
+                        <Text text="{PLANT_HEAD}"/>
+                        <Text text="{PLANT_REVENUE}"/>
+                        <Text text="{PLANT_CUST_COUNT}"/>
                     </cells>
                 </ColumnListItem>
             </items>

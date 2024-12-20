@@ -1,11 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sbpmart/model/formatter"
 ], (Controller,formatter) => {
     "use strict";
     var that;
     return Controller.extend("sbpmart.controller.View1", {
-         formatter : formatter,
+         //formatter : formatter,
         onInit() {
             that=this;
             var oModel=that.getOwnerComponent().getModel();
@@ -14,11 +13,18 @@ sap.ui.define([
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
+            // that.addStyle();
+            const oTable = this.byId("plantData"); 
+            if (oTable) {
+                oTable.attachEventOnce("updateFinished", () => {
+                    that.addStyles(oTable);
+                });
+            }
         },
         onAddPlant: function(){
             that.dialog1.open();
         },
-        onCreatePlant: function(){
+        onCreatePlant: function(){  //Adding a new plant data to the table
             let oPlant = {
                 PLANT_ID :sap.ui.getCore().byId("p_id").getValue(),
                 PLANT_NAME :sap.ui.getCore().byId("p_name").getValue(),
@@ -55,23 +61,31 @@ sap.ui.define([
         onCancelPlant: function()  {
             that.dialog1.close();
         },
-        onEmployeeList: function(oEvent){
+        onEmployeeList: function(oEvent){ //Accessing the plant location and navigating to view2
             var oPlant = oEvent.getSource().getBindingContext().getProperty("PLANT_LOC");
             that.getOwnerComponent().getRouter().navTo("View2",{
                 plantLocation : oPlant
             });
         },
-        formatRevenueClass: function (revenue) {
-            if (revenue > 0 && revenue <= 25000) {
-                return "blue";  // Return the class name for this range
-            } else if (revenue > 25000 && revenue <= 50000) {
-                return "green";  // Return the class name for this range
-            } else if (revenue > 50000 && revenue <= 75000) {
-                return "yellow";  // Return the class name for this range
-            } else {
-                return "red";  // Return the class name for this range
-            }
-        }
+        addStyles(oTable) {
+            //var oTable = that.byId("plantData");
 
+            const aItems = oTable.getItems(); // Get all rows (items) in the table
+
+            aItems.forEach((oItem) => {
+                const oContext = oItem.getBindingContext(); // Get the row's binding context
+                const revenue = oContext.getProperty("PLANT_REVENUE"); // Access the revenue property
+
+                if (revenue > 0 && revenue <= 25000) {
+                    oItem.addStyleClass("red");
+                } else if (revenue > 25000 && revenue <= 50000) {
+                    oItem.addStyleClass("yellow");
+                } else if (revenue > 50000 && revenue <= 75000) {
+                    oItem.addStyleClass("blue");
+                } else {
+                    oItem.addStyleClass("green");
+                }
+            });
+        }
     });
 });

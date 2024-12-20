@@ -1,18 +1,20 @@
-.red {
-    background-color: red !important;
+.blue {
+    background-color: rgb(245, 208, 154) !important;
 }
 
-.green{
-    background-color: green !important;
+.green {
+    background-color: rgb(206, 243, 206) !important;
 }
 
 .yellow {
-    background-color: yellow !important;
+    background-color: rgb(245, 245, 169) !important;
 }
 
-.blue {
-    background-color: blue !important;
+.red {
+    background-color: rgb(245, 164, 164) !important;
 }
+
+
 /* tr[data-rev = ("rev>0 && rev<=25000")]{
     background: #e97070 ;
     }
