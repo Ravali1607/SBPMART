@@ -15,6 +15,18 @@
                 <contentMiddle><Title text="{i18n>branch}{textModel>/EMP_BRANCH}"></Title></contentMiddle>
                 <contentRight><Button icon="sap-icon://add" press="addEmployee"></Button></contentRight>
             </Bar>
+            <ComboBox id="Box" selectionChange="onChange" showClearIcon="true" 
+            showSecondaryValues="true"
+				items="{path : '/items',
+                sorter : {
+                    path : 'Category',
+                    group : true}
+                }"
+            >
+				<core:ListItem key="{ProductId}" text="{Name}" additionalText="{ProductId}"/>
+			</ComboBox>
+            <ComboBox ></ComboBox>
+            <ComboBox ></ComboBox>
             <Table id="empList" items="{
                                             path: '/items',
                                             sorter: [

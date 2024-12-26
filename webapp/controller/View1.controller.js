@@ -70,7 +70,7 @@ sap.ui.define([
         addStyles(oTable) {
             //var oTable = that.byId("plantData");
 
-            const aItems = oTable.getItems(); // Get all rows (items) in the table
+            const aItems = oTable.getItems(); // Get all rows in the table
 
             aItems.forEach((oItem) => {
                 const oContext = oItem.getBindingContext(); // Get the row's binding context

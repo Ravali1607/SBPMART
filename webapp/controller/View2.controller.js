@@ -9,6 +9,8 @@ sap.ui.define([
             that = this;
             var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
             oRouter.getRoute('View2').attachPatternMatched(that.empMethod,that);
+            var oModel = that.getOwnerComponent().getModel();
+            that.getView().setModel(oModel);
             if(!that.dialog2){
                 that.dialog2 = sap.ui.xmlfragment("sbpmart.fragments.createEmp", that);
             }
@@ -66,7 +68,8 @@ sap.ui.define([
             oData.create("/EMPLOYEE", oNewEmployee, {
                 success: function (response) {
                     sap.m.MessageToast.show("Employee Data added successfully");
-                    oData.refresh;
+                    //oModel.refresh();
+                    oData.refresh();
                     }.bind(that),
                 error: function (error) {
                     console.log(error)

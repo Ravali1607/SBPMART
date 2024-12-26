@@ -100,7 +100,7 @@
                     "name": "View2",
                     "pattern": "View2/{plantLocation}",
                     "target": [
-                        "TargetView2"
+                        "TargetView2"                  
                     ]
                 }
             ],
