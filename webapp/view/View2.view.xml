@@ -1,4 +1,4 @@
-<mvc:View xmlns:cards="sap.f.cards" xmlns:uxap="sap.uxap" controllerName="sbpmart.controller.View2"
+<mvc:View xmlns:core="sap.ui.core" xmlns:cards="sap.f.cards" xmlns:uxap="sap.uxap" controllerName="sbpmart.controller.View2"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
         <Page id="page1" showHeader="false">
@@ -15,18 +15,6 @@
                 <contentMiddle><Title text="{i18n>branch}{textModel>/EMP_BRANCH}"></Title></contentMiddle>
                 <contentRight><Button icon="sap-icon://add" press="addEmployee"></Button></contentRight>
             </Bar>
-            <ComboBox id="Box" selectionChange="onChange" showClearIcon="true" 
-            showSecondaryValues="true"
-				items="{path : '/items',
-                sorter : {
-                    path : 'Category',
-                    group : true}
-                }"
-            >
-				<core:ListItem key="{ProductId}" text="{Name}" additionalText="{ProductId}"/>
-			</ComboBox>
-            <ComboBox ></ComboBox>
-            <ComboBox ></ComboBox>
             <Table id="empList" items="{
                                             path: '/items',
                                             sorter: [

@@ -22,14 +22,13 @@ sap.ui.define([
             // }
             var oData = oEvent.getParameter("arguments");
             var plantLoc = oData.plantLocation;
-            var EMP_BRANCH = new sap.ui.model.json.JSONModel({
+            var EMP_BRANCH = new sap.ui.model.json.JSONModel({                       
                 EMP_BRANCH : plantLoc
             })
             that.getView().setModel(EMP_BRANCH,"textModel");
             that.filterEmpByLoc(plantLoc);
-            
         },
-        filterEmpByLoc:function(plantLoc){
+        filterEmpByLoc:function(plantLoc){                                          //filtering the employee data using the branch 
             that.getOwnerComponent().getModel().read("/EMPLOYEE",{
                 success:function(response){
                     var filteredEmployees = response.results.filter(employee=> employee.EMP_BRANCH === plantLoc);
@@ -46,13 +45,13 @@ sap.ui.define([
                 }
             })
         },
-        backNav: function(){
+        backNav: function(){                                                        //navigate to view1
             that.getOwnerComponent().getRouter().navTo("RouteView1");
         },
         addEmployee: function(){
             that.dialog2.open();
         },
-        onSubmit:function(){
+        onSubmit:function(){                                                        //creating a new employee using fragment 
             let oNewEmployee = {
                 EMP_ID : sap.ui.getCore().byId("e_id").getValue(),
                 EMP_NAME : sap.ui.getCore().byId("e_name").getValue(),
@@ -82,7 +81,7 @@ sap.ui.define([
         onClose: function(){
             that.dialog2.close();
         },
-        onReset: function(){
+        onReset: function(){                                                                 //refresh the input fields in the employee fragment 
             sap.ui.getCore().byId("e_id").setValue("");
             sap.ui.getCore().byId("e_name").setValue("");
             sap.ui.getCore().byId("e_bloodgrp").setValue("");

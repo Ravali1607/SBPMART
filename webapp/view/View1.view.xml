@@ -17,9 +17,7 @@
             </items>
         </List> -->
 
-        <Table id="plantData" items="{path: '/PLANTS', sorter: [
-                                                {path: 'PLANT_REVENUE',
-                                                descending : true} ] }">
+        <Table id="plantData" items="{path: '/PLANTS'}">
             <columns>
                 <Column>
                     <Text text="PLANT ID"/>

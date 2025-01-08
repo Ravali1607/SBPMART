@@ -13,7 +13,6 @@ sap.ui.define([
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
-            // that.addStyle();
             const oTable = this.byId("plantData"); 
             if (oTable) {
                 oTable.attachEventOnce("updateFinished", () => {
@@ -47,7 +46,7 @@ sap.ui.define([
             that.onRefresh();
             that.dialog1.close();
         },
-        onRefresh: function(){
+        onRefresh: function(){                          //refresh the input fields in the fragment
             sap.ui.getCore().byId("p_id").setValue("");
             sap.ui.getCore().byId("p_name").setValue("");
             sap.ui.getCore().byId("p_loc").setValue("");
@@ -81,7 +80,7 @@ sap.ui.define([
                 } else if (revenue > 25000 && revenue <= 50000) {
                     oItem.addStyleClass("yellow");
                 } else if (revenue > 50000 && revenue <= 75000) {
-                    oItem.addStyleClass("blue");
+                    oItem.addStyleClass("orange");
                 } else {
                     oItem.addStyleClass("green");
                 }
