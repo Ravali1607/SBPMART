@@ -13,16 +13,11 @@ sap.ui.define([
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
-            // var oSorter = new Sorter({
-            //     path: "PLANT_REVENUE", 
-            //     descending: true             
-            // });  
+            
             var oTable = that.byId("plantData");
-            var oBinding = oTable.getBinding("items");
-            // oTable.getBinding("items").sort(oSorter);
-            if (oTable) {
+            if (oTable) {            
                 oTable.attachEventOnce("updateFinished", () => {
-                    that.addStyles(oTable);
+                    that.onSort();
                 });
             }  
         },
@@ -73,13 +68,26 @@ sap.ui.define([
                 plantLocation : oPlant
             });
         },
-        addStyles(oTable) {
-            //var oTable = that.byId("plantData");
+        onSort(){
+            var oSorter = new Sorter({
+                            path: "PLANT_REVENUE", 
+                            descending : true
+                            });  
+            var table = that.byId("plantData");
+            table.getBinding("items").sort(oSorter);
+            if (table) {
+                    table.attachEventOnce("updateFinished", () => {
+                        that.addStyles();
+                    });
+                }
+            that.byId("plantData").refresh();  
+        },
+        addStyles() {
+            var oTable = that.byId("plantData");
             const aItems = oTable.getItems(); // Get all rows in the table
             aItems.forEach((oItem) => {
                 const oContext = oItem.getBindingContext(); // Get the row's binding context
                 const revenue = oContext.getProperty("PLANT_REVENUE"); // Access the revenue property
-
                 if (revenue > 0 && revenue <= 25000) {
                     oItem.addStyleClass("red");
                 } else if (revenue > 25000 && revenue <= 50000) {
@@ -90,6 +98,7 @@ sap.ui.define([
                     oItem.addStyleClass("green");
                 }
             });
+            that.byId("plantData").refresh();
         },       
         onDeletePlant: function(){
             var oTable = that.getView().byId("plantData");
