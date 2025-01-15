@@ -13,19 +13,18 @@ sap.ui.define([
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
-            var oSorter = new Sorter({
-                path: "PLANT_REVENUE", 
-                descending: true             
-            });  
-            var oList = that.byId("plantData");
-             oList.getBinding("items");
-            // oList.getBinding("items").sort(oSorter);
-            const oTable = that.byId("plantData"); 
+            // var oSorter = new Sorter({
+            //     path: "PLANT_REVENUE", 
+            //     descending: true             
+            // });  
+            var oTable = that.byId("plantData");
+            var oBinding = oTable.getBinding("items");
+            // oTable.getBinding("items").sort(oSorter);
             if (oTable) {
                 oTable.attachEventOnce("updateFinished", () => {
                     that.addStyles(oTable);
                 });
-            }     
+            }  
         },
         onAddPlant: function(){
             that.dialog1.open();
@@ -76,9 +75,7 @@ sap.ui.define([
         },
         addStyles(oTable) {
             //var oTable = that.byId("plantData");
-
             const aItems = oTable.getItems(); // Get all rows in the table
-
             aItems.forEach((oItem) => {
                 const oContext = oItem.getBindingContext(); // Get the row's binding context
                 const revenue = oContext.getProperty("PLANT_REVENUE"); // Access the revenue property
