@@ -4,22 +4,14 @@
     <Page id="page" showHeader="false" title="{i18n>title}">
         <Bar >
             <contentLeft><Text text="PLANTS INFORMATION"></Text></contentLeft>
-            <contentRight><Button icon="sap-icon://add" press="onAddPlant"></Button></contentRight>
+            <contentRight>
+                <Button icon="sap-icon://add" press="onAddPlant"></Button>
+                <Button icon="sap-icon://delete" press="onDeletePlant"></Button>
+            </contentRight>
         </Bar>
-        
-        <!-- <List items = "{/PLANTS}">
-            <items>
-            <StandardListItem 
-            title="{PLANT_NAME}"
-            description="{PLANT_LOC}"
-            type="Navigation"
-            press="onEmployeeList"></StandardListItem>
-            </items>
-        </List> -->
-
-        <Table id="plantData" items="{path: '/PLANTS'}">
+        <Table id="plantData" mode="MultiSelect" items="{/PLANTS}">
             <columns>
-                <Column>
+                <Column >
                     <Text text="PLANT ID"/>
                 </Column>
                 <Column>

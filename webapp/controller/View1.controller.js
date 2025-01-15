@@ -1,10 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-], (Controller,formatter) => {
+    "sap/ui/model/Sorter"
+], (Controller,Sorter) => {
     "use strict";
     var that;
     return Controller.extend("sbpmart.controller.View1", {
-         //formatter : formatter,
         onInit() {
             that=this;
             var oModel=that.getOwnerComponent().getModel();
@@ -13,12 +13,19 @@ sap.ui.define([
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
-            const oTable = this.byId("plantData"); 
+            var oSorter = new Sorter({
+                path: "PLANT_REVENUE", 
+                descending: true             
+            });  
+            var oList = that.byId("plantData");
+             oList.getBinding("items");
+            // oList.getBinding("items").sort(oSorter);
+            const oTable = that.byId("plantData"); 
             if (oTable) {
                 oTable.attachEventOnce("updateFinished", () => {
                     that.addStyles(oTable);
                 });
-            }
+            }     
         },
         onAddPlant: function(){
             that.dialog1.open();
@@ -45,6 +52,7 @@ sap.ui.define([
             })
             that.onRefresh();
             that.dialog1.close();
+            that.byId("plantData").refresh();
         },
         onRefresh: function(){                          //refresh the input fields in the fragment
             sap.ui.getCore().byId("p_id").setValue("");
@@ -85,6 +93,28 @@ sap.ui.define([
                     oItem.addStyleClass("green");
                 }
             });
+        },       
+        onDeletePlant: function(){
+            var oTable = that.getView().byId("plantData");
+            var oSelectedItem = oTable.getSelectedItems();
+            var oModel = that.getOwnerComponent().getModel();
+            if(oSelectedItem == 0){
+                sap.m.MessageToast.show("No Plant is selected");
+            }else{
+            for(var i=0; i < oSelectedItem.length; i++){
+                    var item = oSelectedItem[i];
+                    var oPlantData = item.getBindingContext().getObject();               //storing the selected plant details into oPlantData
+                    var deletePath = `/PLANTS('${oPlantData.PLANT_ID}')`                 //fetching the plant id
+                    oModel.remove(deletePath,{
+                        success: function(){
+                            sap.m.MessageToast.show("Plant Details deleted successfully..!")
+                            console.log("success");
+                        },error: function(error){
+                            console.log(error);
+                        }
+                    })
+                }
+            }
         }
     });
 });
