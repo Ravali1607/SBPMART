@@ -20,6 +20,7 @@ sap.ui.define([
                     that.onSort();                                      //for sorting the table using plant revenue
                 }); 
             }
+            oModel.refresh();
         },
         onAddPlant: function(){
             that.dialog1.open();
@@ -46,7 +47,7 @@ sap.ui.define([
             })
             that.onRefresh();
             that.dialog1.close();
-            that.byId("plantData").refresh();
+            // that.byId("plantData").refresh();
         },
         onRefresh: function(){                          //refresh the input fields in the fragment
             sap.ui.getCore().byId("p_id").setValue("");
@@ -68,45 +69,43 @@ sap.ui.define([
                 plantLocation : oPlant
             });
         },
-        onSort(){
-            var oSorter = new Sorter({
-                            path: "PLANT_REVENUE",                      //displaying the values in the descending order 
-                            descending : true,
-                           
-                        });  
-            var table = that.byId("plantData");
-            table.getBinding("items").sort(oSorter);
-            if (table) {
-                    table.attachEventOnce("updateFinished", () => {
-                        that.addStyles();                               
-                    });
-                } 
-        },
         // onSort(){
-        //     var oTable = that.byId("plantData");
-        //     var oBinding = oTable.getBinding("items");
-        //     var oItems = oTable.getItems();
-        //     oItems.sort(function(a,b){
-        //         var rev1 = a.getBindingContext().getProperty("PLANT_REVENUE");
-        //         var rev2 = b.getBindingContext().getProperty("PLANT_REVENUE");
-        //         if(rev1 > rev2) return -1;
-        //         if(rev1 < rev2) return 1;
-        //         return 0;
-        //     })
-        //     oBinding.sort(new Sorter("PLANT_REVENUE", true));
-        //     oTable.getBinding("items");
-        // if (table) {
-        //     table.attachEventOnce("updateFinished", () => {
-        //         that.addStyles();                               
-        //     });
-        // } 
+        //     var oSorter = new Sorter({
+        //                     path: "PLANT_REVENUE",                      //displaying the values in the descending order 
+        //                                           
+        //                 });  
+        //     var table = that.byId("plantData");
+        //     table.getBinding("items").sort(oSorter);
+        //     if (table) {
+        //             table.attachEventOnce("updateFinished", () => {
+        //                 that.addStyles();                               
+        //             });
+        //         }
         // },
+        onSort(){
+            var oTable = that.byId("plantData");
+            var oBinding = oTable.getBinding("items");
+            var oItems = oTable.getItems();
+            oItems.sort((a,b) => {
+                var rev1 = parseFloat(a.getBindingContext().getProperty("PLANT_REVENUE"));
+                var rev2 = parseFloat(b.getBindingContext().getProperty("PLANT_REVENUE"));
+                if(rev1 < rev2) return -1;
+                if(rev1 > rev2) return 1;
+            })
+            oBinding.sort(new Sorter("PLANT_REVENUE",false));
+            oTable.getBinding("items");
+            if (oTable) {
+                oTable.attachEventOnce("updateFinished", () => {
+                    that.addStyles();                               
+                });
+            } 
+        },
         addStyles() {
             var oTable = that.byId("plantData");
-            const aItems = oTable.getItems(); // Get all rows in the table
+            const aItems = oTable.getItems();                                   // Get all rows in the table
             aItems.forEach((oItem) => {
-                const oContext = oItem.getBindingContext(); // Get the row's binding context
-                const revenue = oContext.getProperty("PLANT_REVENUE"); // Access the revenue property
+                const oContext = oItem.getBindingContext();                     // Get the row's binding context
+                const revenue = oContext.getProperty("PLANT_REVENUE");          // Access the revenue property
                 if (revenue > 0 && revenue <= 25000) {
                     oItem.addStyleClass("red");
                 } else if (revenue > 25000 && revenue <= 50000) {
