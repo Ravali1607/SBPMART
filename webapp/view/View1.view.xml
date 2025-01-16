@@ -32,7 +32,7 @@
                 <Column>
                     <Text text="HEAD"/>
                 </Column>
-                <Column>
+                <Column >
                     <Text text="REVENUE"/>
                 </Column>
                 <Column>

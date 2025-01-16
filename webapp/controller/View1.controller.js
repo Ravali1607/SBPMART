@@ -17,9 +17,9 @@ sap.ui.define([
             var oTable = that.byId("plantData");
             if (oTable) {            
                 oTable.attachEventOnce("updateFinished", () => {
-                    that.onSort();
-                });
-            }  
+                    that.onSort();                                      //for sorting the table using plant revenue
+                }); 
+            }
         },
         onAddPlant: function(){
             that.dialog1.open();
@@ -70,18 +70,37 @@ sap.ui.define([
         },
         onSort(){
             var oSorter = new Sorter({
-                            path: "PLANT_REVENUE", 
-                            descending : true
-                            });  
+                            path: "PLANT_REVENUE",                      //displaying the values in the descending order 
+                            descending : true,
+                           
+                        });  
             var table = that.byId("plantData");
             table.getBinding("items").sort(oSorter);
             if (table) {
                     table.attachEventOnce("updateFinished", () => {
-                        that.addStyles();
+                        that.addStyles();                               
                     });
-                }
-            that.byId("plantData").refresh();  
+                } 
         },
+        // onSort(){
+        //     var oTable = that.byId("plantData");
+        //     var oBinding = oTable.getBinding("items");
+        //     var oItems = oTable.getItems();
+        //     oItems.sort(function(a,b){
+        //         var rev1 = a.getBindingContext().getProperty("PLANT_REVENUE");
+        //         var rev2 = b.getBindingContext().getProperty("PLANT_REVENUE");
+        //         if(rev1 > rev2) return -1;
+        //         if(rev1 < rev2) return 1;
+        //         return 0;
+        //     })
+        //     oBinding.sort(new Sorter("PLANT_REVENUE", true));
+        //     oTable.getBinding("items");
+        // if (table) {
+        //     table.attachEventOnce("updateFinished", () => {
+        //         that.addStyles();                               
+        //     });
+        // } 
+        // },
         addStyles() {
             var oTable = that.byId("plantData");
             const aItems = oTable.getItems(); // Get all rows in the table
@@ -98,7 +117,6 @@ sap.ui.define([
                     oItem.addStyleClass("green");
                 }
             });
-            that.byId("plantData").refresh();
         },       
         onDeletePlant: function(){
             var oTable = that.getView().byId("plantData");

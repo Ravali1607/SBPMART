@@ -17,17 +17,17 @@ xmlns= "sap.m"
                 <Label text="Location"></Label>
                 <Input id="p_loc"></Input>
                 <Label text="Avatar"></Label>
-                <Input id="p_avatar"></Input>
+                <Input id="p_avatar" type="Url"></Input>
                 <Label text="Contact"></Label>
-                <Input id="p_cont"></Input>
+                <Input id="p_cont" type="Number" maxLength="10"></Input>
                 <Label text="Email"></Label>
                 <Input id="p_email"></Input>
                 <Label text="Head of the Plant"></Label>
                 <Input id="p_head"></Input>
                 <Label text="Revenue"></Label>
-                <Input id="p_rev"></Input>
+                <Input id="p_rev" type="Number"></Input>
                 <Label text="Customer Count"></Label>
-                <Input id="p_count"></Input>
+                <Input id="p_count" type="Number"></Input>
             </form:content>
         </form:SimpleForm>
         <footer>
