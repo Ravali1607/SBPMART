@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/Sorter"
-], (Controller,Sorter) => {
+    "sap/ui/model/Sorter",
+    "sap/ui/model/json/JSONModel"
+], (Controller,Sorter,JSONModel) => {
     "use strict";
     var that;
     return Controller.extend("sbpmart.controller.View1", {
@@ -9,18 +10,26 @@ sap.ui.define([
             that=this;
             var oModel=that.getOwnerComponent().getModel();
             that.getView().getModel(oModel);
-            
+            oModel.read("/PLANTS",{
+                success : (oData) => {
+                    const aPlants = oData.results;
+                    const oSortedPlants = that.onSort(aPlants);
+                    const oSortModel = new JSONModel({PLANTS : oSortedPlants});
+                    that.getView().setModel(oSortModel);
+                    that.addStyles();
+                }
+            })
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
             
-            var oTable = that.byId("plantData");
-            if (oTable) {            
-                oTable.attachEventOnce("updateFinished", () => {
-                    that.onSort();                                      //for sorting the table using plant revenue
-                }); 
-            }
-            oModel.refresh();
+            // var oTable = that.byId("plantData");
+            // if (oTable) {            
+            //     oTable.attachEventOnce("updateFinished",() => {
+            //         that.onSort();                                      //for sorting the table using plant revenue
+            //     }); 
+            // }
+            // oModel.refresh();
         },
         onAddPlant: function(){
             that.dialog1.open();
@@ -37,9 +46,12 @@ sap.ui.define([
                 PLANT_REVENUE :sap.ui.getCore().byId("p_rev").getValue(),
                 PLANT_CUST_COUNT :sap.ui.getCore().byId("p_count").getValue(),
             }
-            that.getOwnerComponent().getModel().create("/PLANTS",oPlant,{
+            var oModel = that.getOwnerComponent().getModel();
+            oModel.create("/PLANTS",oPlant,{
                 success:function(response){
                     sap.m.MessageToast.show("Plant Details added successfully");
+                    oModel.refresh();
+                    sap.ui.getCore().byId("plantData").getModel().refresh(true);
                 },error:function(error){
                     sap.m.MessageToast.show("Error while adding Plant");
                     console.log(error);
@@ -47,7 +59,6 @@ sap.ui.define([
             })
             that.onRefresh();
             that.dialog1.close();
-            // that.byId("plantData").refresh();
         },
         onRefresh: function(){                          //refresh the input fields in the fragment
             sap.ui.getCore().byId("p_id").setValue("");
@@ -82,30 +93,39 @@ sap.ui.define([
         //             });
         //         }
         // },
-        onSort(){
-            var oTable = that.byId("plantData");
-            var oBinding = oTable.getBinding("items");
-            var oItems = oTable.getItems();
-            oItems.sort((a,b) => {
-                var rev1 = parseFloat(a.getBindingContext().getProperty("PLANT_REVENUE"));
-                var rev2 = parseFloat(b.getBindingContext().getProperty("PLANT_REVENUE"));
-                if(rev1 < rev2) return -1;
-                if(rev1 > rev2) return 1;
+        onSort(aPlants){
+            aPlants.forEach((_,i) => {
+                aPlants.forEach((_,j) => {
+                    if(aPlants[j+1] && parseInt(aPlants[j].PLANT_REVENUE)> parseInt(aPlants[j+1].PLANT_REVENUE)){
+                        const temp = aPlants[j];
+                        aPlants[j] = aPlants[j+1];
+                        aPlants[j+1] = temp;
+                    }
+                })
             })
-            oBinding.sort(new Sorter("PLANT_REVENUE",false));
-            oTable.getBinding("items");
-            if (oTable) {
-                oTable.attachEventOnce("updateFinished", () => {
-                    that.addStyles();                               
-                });
-            } 
+            return aPlants;
+            // var oTable = that.byId("plantData");
+            // var oBinding = oTable.getBinding("items");
+
+            // if (oBinding) {
+            //     var oItems = oTable.getItems();
+            //     oItems.sort((a,b) => {
+            //         var rev1 = parseFloat(a.getBindingContext().getProperty("PLANT_REVENUE"));
+            //         var rev2 = parseFloat(b.getBindingContext().getProperty("PLANT_REVENUE"));
+            //         if(rev1 < rev2) return -1;
+            //         if(rev1 > rev2) return 1;
+            //     }) 
+            //     const oSorter = new Sorter("PLANT_REVENUE", false); // false for ascending, true for descending
+            //     oBinding.sort(oSorter);
+            // }
+           
         },
         addStyles() {
             var oTable = that.byId("plantData");
             const aItems = oTable.getItems();                                   // Get all rows in the table
             aItems.forEach((oItem) => {
                 const oContext = oItem.getBindingContext();                     // Get the row's binding context
-                const revenue = oContext.getProperty("PLANT_REVENUE");          // Access the revenue property
+                const revenue = parseInt(oContext.getProperty("PLANT_REVENUE"));          // Access the revenue property
                 if (revenue > 0 && revenue <= 25000) {
                     oItem.addStyleClass("red");
                 } else if (revenue > 25000 && revenue <= 50000) {

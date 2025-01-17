@@ -49,10 +49,7 @@
                         <Text text="{PLANT_CONT}"/>
                         <Text text="{PLANT_EMAIL}"/>
                         <Text text="{PLANT_HEAD}"/>
-                        <Text text="{
-								path: 'PLANT_REVENUE',
-								type: 'sap.ui.model.type.Integer'
-							}"/>
+                        <Text text="{PLANT_REVENUE}"/>
                         <Text text="{PLANT_CUST_COUNT}"/>
                     </cells>
                 </ColumnListItem>
