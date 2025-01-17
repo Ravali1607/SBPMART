@@ -9,7 +9,7 @@
                 <Button icon="sap-icon://delete" press="onDeletePlant"></Button>
             </contentRight>
         </Bar>
-        <Table id="plantData" mode="MultiSelect" items="{path : '/PLANTS'}">
+        <Table id="plantData" mode="MultiSelect" items="{path : '/PLANTS'}" sticky="ColumnHeaders" >
             <columns>
                 <Column >
                     <Text text="PLANT ID"/>

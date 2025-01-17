@@ -11,8 +11,10 @@ sap.ui.define([
             var oModel=that.getOwnerComponent().getModel();
             that.getView().getModel(oModel);
             oModel.read("/PLANTS",{
-                success : (oData) => {
+                success : (oData) => {                                                      //using json model storing the sorted data and binding it into the table
                     const aPlants = oData.results;
+                    // aPlants = aPlants.sort((a,b) =>{ return parseInt(a.PLANT_REVENUE) - parseInt(b.PLANT_REVENUE) })
+
                     const oSortedPlants = that.onSort(aPlants);
                     const oSortModel = new JSONModel({PLANTS : oSortedPlants});
                     that.getView().setModel(oSortModel);
@@ -22,14 +24,16 @@ sap.ui.define([
             if(!that.dialog1){
                 that.dialog1 = sap.ui.xmlfragment("sbpmart.fragments.createPlant", that);
             }  
-            
-            // var oTable = that.byId("plantData");
-            // if (oTable) {            
-            //     oTable.attachEventOnce("updateFinished",() => {
-            //         that.onSort();                                      //for sorting the table using plant revenue
-            //     }); 
-            // }
-            // oModel.refresh();
+        },
+        onBeforeRendering(){
+            var oModel=that.getOwnerComponent().getModel();
+            that.getView().getModel(oModel);
+            oModel.refresh();
+        },
+        onAfterRendering(){
+            var oModel=that.getOwnerComponent().getModel();
+            that.getView().getModel(oModel);
+            oModel.refresh();
         },
         onAddPlant: function(){
             that.dialog1.open();
@@ -59,6 +63,7 @@ sap.ui.define([
             })
             that.onRefresh();
             that.dialog1.close();
+            oModel.refresh();
         },
         onRefresh: function(){                          //refresh the input fields in the fragment
             sap.ui.getCore().byId("p_id").setValue("");
@@ -74,51 +79,11 @@ sap.ui.define([
         onCancelPlant: function()  {
             that.dialog1.close();
         },
-        onEmployeeList: function(oEvent){ //Accessing the plant location and navigating to view2
-            var oPlant = oEvent.getSource().getBindingContext().getProperty("PLANT_LOC");
-            that.getOwnerComponent().getRouter().navTo("View2",{
-                plantLocation : oPlant
-            });
-        },
-        // onSort(){
-        //     var oSorter = new Sorter({
-        //                     path: "PLANT_REVENUE",                      //displaying the values in the descending order 
-        //                                           
-        //                 });  
-        //     var table = that.byId("plantData");
-        //     table.getBinding("items").sort(oSorter);
-        //     if (table) {
-        //             table.attachEventOnce("updateFinished", () => {
-        //                 that.addStyles();                               
-        //             });
-        //         }
-        // },
-        onSort(aPlants){
-            aPlants.forEach((_,i) => {
-                aPlants.forEach((_,j) => {
-                    if(aPlants[j+1] && parseInt(aPlants[j].PLANT_REVENUE)> parseInt(aPlants[j+1].PLANT_REVENUE)){
-                        const temp = aPlants[j];
-                        aPlants[j] = aPlants[j+1];
-                        aPlants[j+1] = temp;
-                    }
-                })
-            })
+        onSort(aPlants){                                    //comparing each and every row with the next rows for sorting  
+            aPlants.sort((a,b) => {
+                return parseInt(a.PLANT_REVENUE) - parseInt(b.PLANT_REVENUE);
+            })   
             return aPlants;
-            // var oTable = that.byId("plantData");
-            // var oBinding = oTable.getBinding("items");
-
-            // if (oBinding) {
-            //     var oItems = oTable.getItems();
-            //     oItems.sort((a,b) => {
-            //         var rev1 = parseFloat(a.getBindingContext().getProperty("PLANT_REVENUE"));
-            //         var rev2 = parseFloat(b.getBindingContext().getProperty("PLANT_REVENUE"));
-            //         if(rev1 < rev2) return -1;
-            //         if(rev1 > rev2) return 1;
-            //     }) 
-            //     const oSorter = new Sorter("PLANT_REVENUE", false); // false for ascending, true for descending
-            //     oBinding.sort(oSorter);
-            // }
-           
         },
         addStyles() {
             var oTable = that.byId("plantData");
@@ -152,12 +117,63 @@ sap.ui.define([
                         success: function(){
                             sap.m.MessageToast.show("Plant Details deleted successfully..!")
                             console.log("success");
+                            oModel.refresh()
                         },error: function(error){
                             console.log(error);
                         }
                     })
                 }
             }
-        }
+        },
+        onEmployeeList: function(oEvent){ //Accessing the plant location and navigating to view2
+            var oPlant = oEvent.getSource().getBindingContext().getProperty("PLANT_LOC");
+            that.getOwnerComponent().getRouter().navTo("View2",{
+                plantLocation : oPlant
+            });
+        },
     });
 });
+// var oTable = that.byId("plantData");
+// if (oTable) {            
+//     oTable.attachEventOnce("updateFinished",() => {
+//         that.onSort();                                      //for sorting the table using plant revenue
+//     }); 
+// }
+// oModel.refresh();
+// onSort(){
+    //     var oSorter = new Sorter({
+    //                     path: "PLANT_REVENUE",                      //displaying the values in the descending order 
+    //                                           
+    //                 });  
+    //     var table = that.byId("plantData");
+    //     table.getBinding("items").sort(oSorter);
+    //     if (table) {
+    //             table.attachEventOnce("updateFinished", () => {
+    //                 that.addStyles();                               
+    //             });
+    //         }
+    // },
+    // var oTable = that.byId("plantData");
+// var oBinding = oTable.getBinding("items");
+
+// if (oBinding) {
+//     var oItems = oTable.getItems();
+//     oItems.sort((a,b) => {
+//         var rev1 = parseFloat(a.getBindingContext().getProperty("PLANT_REVENUE"));
+//         var rev2 = parseFloat(b.getBindingContext().getProperty("PLANT_REVENUE"));
+//         if(rev1 < rev2) return -1;
+//         if(rev1 > rev2) return 1;
+//     }) 
+//     const oSorter = new Sorter("PLANT_REVENUE", false); // false for ascending, true for descending
+//     oBinding.sort(oSorter);
+// }
+// aPlants.forEach((_,i) => {
+            //     aPlants.forEach((_,j) => {                                                  
+            //         if(aPlants[j+1] && parseInt(aPlants[j].PLANT_REVENUE)< parseInt(aPlants[j+1].PLANT_REVENUE)){
+            //             const temp = aPlants[j];
+            //             aPlants[j] = aPlants[j+1];
+            //             aPlants[j+1] = temp;
+            //         }
+            //     })
+            // })
+            // return aPlants; 

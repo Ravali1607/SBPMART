@@ -10,21 +10,21 @@ xmlns= "sap.m"
     </customHeader>
         <form:SimpleForm >
             <form:content>
-                <Label text="Plant ID"></Label>
+                <Label text="Plant ID" required="true"></Label>
                 <Input id="p_id"></Input>
                 <Label text="Name"></Label>
                 <Input id="p_name"></Input>
-                <Label text="Location"></Label>
+                <Label text="Location" required="true"></Label>
                 <Input id="p_loc"></Input>
                 <Label text="Avatar"></Label>
-                <Input id="p_avatar" type="Url"></Input>
+                <Input id="p_avatar"></Input>
                 <Label text="Contact"></Label>
                 <Input id="p_cont" type="Number" maxLength="10"></Input>
                 <Label text="Email"></Label>
                 <Input id="p_email"></Input>
                 <Label text="Head of the Plant"></Label>
                 <Input id="p_head"></Input>
-                <Label text="Revenue"></Label>
+                <Label text="Revenue" required="true"></Label>
                 <Input id="p_rev" type="Number"></Input>
                 <Label text="Customer Count"></Label>
                 <Input id="p_count" type="Number"></Input>
